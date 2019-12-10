@@ -1,6 +1,6 @@
 # ROS2 YAML example for unknown node name
 
-This repos is simple package that demonstrates the ability of ROS2 launch routine to load parameters from YAML file with no node name.
+This repo is a simple package that demonstrates the ability of ROS2 launch routine to load parameters from YAML file with no node name.
 
 
 In `main.cpp` file we define a simple class that derives from `rclcpp::Node`.
@@ -13,17 +13,18 @@ class MainNode : public rclcpp::Node
 public:
     MainNode() : rclcpp::Node("node", rclcpp::NodeOptions())
     {
-        declare_parameter("param_int", 0);
-        declare_parameter("param_string", "default_text");
+        declare_parameter("param_int", 0);  // Default value of 0
+        declare_parameter("param_string", "default_text");   // Default string is given
         
         RCLCPP_INFO(get_logger(), "Integer parameter: %d", get_parameter("param_int").as_int());
-        RCLCPP_INFO(get_logger(), "String  parameter: %s", get_parameter("param_string").as_string().c_str());
+        RCLCPP_INFO(get_logger(), "String  parameter: %s", 
+                                             get_parameter("param_string").as_string().c_str());
     }
 };
 ```
 
 
-We defind a YAML file with parameters:
+We define a YAML file with parameters:
 ```YAML
 /**: # This will put all the parameters in every node
   ros__parameters:
@@ -33,8 +34,8 @@ We defind a YAML file with parameters:
 
 Instead of the node name we put **double asterisk**.
 
-Next, we launch the noude from the launch file 3 times:
-* With no namespace and node parameters
+Next, we define the launch file with 3 nodes based on `main.cpp`:
+* With no namespace and no node parameters
 * With defined namespace and parameters from our file
 * With no namespace and parameters from our file
  
