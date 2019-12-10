@@ -13,12 +13,9 @@ os.environ['RCUTILS_CONSOLE_STDOUT_LINE_BUFFERED'] = "1"
 
 
 def generate_launch_description():
-    qos_profile = LaunchConfiguration('qos_profile', default=0)
-    # ns = testing
-    namespace = LaunchConfiguration('ns', default="")
     return LaunchDescription([
         Node(
-            node_namespace=namespace,
+            node_namespace="some_namespace",
             package='ros2-yaml-unnamed-node',
             node_executable='main',
             node_name='node_with_params',
@@ -27,7 +24,6 @@ def generate_launch_description():
                 'param', 'test.param.yaml')],
             output='screen'),
         Node(
-            node_namespace=namespace,
             package='ros2-yaml-unnamed-node',
             node_executable='main',
             node_name='another_node_with_same_params',
@@ -36,7 +32,7 @@ def generate_launch_description():
                 'param', 'test.param.yaml')],
             output='screen'),
         Node(
-            node_namespace=namespace,
+            node_namespace="",
             package='ros2-yaml-unnamed-node',
             node_executable='main',
             node_name='node_without_params',
