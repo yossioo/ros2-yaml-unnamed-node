@@ -1,0 +1,4 @@
+/**: # This will put all the parameters in every node
+  ros__parameters:
+    param_int: 5
+    param_string: "Different text from the YAML file"
